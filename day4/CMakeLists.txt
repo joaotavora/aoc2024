@@ -1,0 +1,11 @@
+add_executable(day4-1 day4-1.cpp)
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  target_compile_options(day4-1 PRIVATE "-fsanitize=address,undefined")
+  target_link_options(day4-1 PRIVATE "-fsanitize=address,undefined")
+endif()
+
+add_executable(day4-2 day4-2.cpp)
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  target_compile_options(day4-2 PRIVATE "-fsanitize=address,undefined")
+  target_link_options(day4-2 PRIVATE "-fsanitize=address,undefined")
+endif()
