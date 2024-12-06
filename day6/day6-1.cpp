@@ -1,3 +1,4 @@
+#include <numeric>
 #include <string>
 #include <iostream>
 #include <string_view>
@@ -7,52 +8,45 @@
 
 auto main() -> int {
 
-  using obstacle_map_t = std::map<size_t, std::vector<size_t>>;
+  using map_t = std::vector<std::string>;
   using point_t = std::pair<size_t, size_t>;
+  enum direction_e {north, east, south, west};
 
-  obstacle_map_t obstacles_by_row;
-  obstacle_map_t obstacles_by_col;
-
-  enum direction_e {north, east, south, west} direction = north;
-  point_t pos;
+  size_t n{0};
+  map_t map{};
+  direction_e direction{north};
+  point_t pos{0, 0};
 
   std::string buf;
   std::string_view starter{"^>v<"};
-  size_t i{};
   while (std::getline(std::cin, buf)) {
     for (auto j = 0u; j < buf.size(); ++j) {
-      if (buf[j] == '#') {
-        obstacles_by_row[i].push_back(j);
-        obstacles_by_col[j].push_back(i);
-      } else if (auto p = starter.find(buf[j]); p != starter.npos) {
+      if (auto p = starter.find(buf[j]); p != starter.npos) {
         direction = static_cast<direction_e>(p);
-        pos = {j, i};
+        pos = {j, map.size()};
       }
     }
-    ++i;
+    map.push_back(std::move(buf));
   }
 
-  std::println("Starting position is ({},{})", pos.first, pos.second);
-  std::println("Starting direction is {}", static_cast<int>(direction));
-
-  for (auto&& row : obstacles_by_row) {
-    std::print("Obstacles on row {}: ", row.first);
-    auto sep = "";
-    for (auto&& o : row.second) {
-      std::print("{}{}", sep, o);
-      sep = ",";
+  while (true) {
+    switch (direction) {
+    case south: {
+      
+      break;
     }
-    std::println();
+    case west: {
+      break;
+    }
+    case north: {
+      break;
+    }
+    case west: {
+      break;
+    }
   }
 
-  for (auto&& col : obstacles_by_col) {
-    std::print("Obstacles on col {}: ", col.first);
-    auto sep = "";
-    for (auto&& o : col.second) {
-      std::print("{}{}", sep, o);
-      sep = ",";
-    }
-    std::println();
-  }
+
+  std::println("{}", std::accumulate(bitmap.begin(), bitmap.end(), 0));
 
 }
